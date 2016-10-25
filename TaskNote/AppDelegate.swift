@@ -13,11 +13,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 	@IBOutlet weak var window: NSWindow!
 	var statusItem: NSStatusItem!
-
 	let key = "TaskNoteValue"
 	let defaultNote = "TaskNote is empty"
 
-	var note: String {
+	private var note: String {
 		get {
 			return UserDefaults.standard.string(forKey: key) ?? defaultNote
 		}
@@ -33,15 +32,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 	}
 
 	func applicationDidFinishLaunching(_ aNotification: Notification) {
-		// Insert code here to initialize your application
 		self.statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
-		statusItem.isEnabled = true
 		updateTitle()
 		createMenu()
 	}
 
 	func applicationWillTerminate(_ aNotification: Notification) {
-		// Insert code here to tear down your application
 	}
 
 	func editNotePressed(sender: NSMenuItem) {
@@ -61,7 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		}
 	}
 
-	@objc func quit(sender: NSMenuItem) {
+	func quit(sender: NSMenuItem) {
 		exit(0)
 	}
 
@@ -75,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		menu.addItem(NSMenuItem.separator())
 
 		let quitItem = NSMenuItem(title: "Quit TaskNote", action: #selector(quit(sender:)), keyEquivalent: "q")
-		quitItem.target = self
+		quitItem.target = sel
 		menu.addItem(quitItem)
 
 		statusItem.menu = menu
