@@ -51,7 +51,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		alert.addButton(withTitle: "Cancel")
 		switch(alert.runModal()) {
 		case NSAlertFirstButtonReturn:
-			note = input.stringValue
+			note = input.stringValue.isEmpty ? defaultNote : input.stringValue
 		default:
 			break
 		}
@@ -71,7 +71,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 		menu.addItem(NSMenuItem.separator())
 
 		let quitItem = NSMenuItem(title: "Quit TaskNote", action: #selector(quit(sender:)), keyEquivalent: "q")
-		quitItem.target = sel
+		quitItem.target = self
 		menu.addItem(quitItem)
 
 		statusItem.menu = menu
